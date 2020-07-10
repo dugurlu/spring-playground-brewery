@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Service
 public class BeerServiceImpl implements BeerService {
-	@Override public Beer getBeerById(UUID id) {
+	@Override public Beer getById(UUID id) {
 		return Beer.builder()
 				.id(UUID.randomUUID())
 				.name("Augustiner Hell")
