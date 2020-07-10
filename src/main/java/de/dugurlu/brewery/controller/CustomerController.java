@@ -28,6 +28,6 @@ public class CustomerController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Customer> getById(@PathVariable UUID id) {
-		return new ResponseEntity<Customer>(customerService.getById(id), HttpStatus.OK);
+		return new ResponseEntity<>(customerService.getById(id), HttpStatus.OK);
 	}
 }
