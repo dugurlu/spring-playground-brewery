@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 
@@ -14,7 +15,13 @@ import java.util.UUID;
 @Builder
 public class Beer {
 	private UUID id;
+	private OffsetDateTime created;
+	private OffsetDateTime modified;
+
 	private String name;
-	private String style;
+	private BeerStyle style;
 	private Long upc;
+	private Long price;
+	private Integer quantity;
+
 }

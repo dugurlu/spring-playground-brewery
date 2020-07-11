@@ -4,10 +4,9 @@ import de.dugurlu.brewery.model.Beer;
 import de.dugurlu.brewery.service.BeerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
 import java.util.UUID;
 
@@ -30,4 +29,25 @@ public class BeerController {
 		return new ResponseEntity<>(beerService.getById(id), HttpStatus.OK);
 	}
 
+
+	@PostMapping
+	public ResponseEntity<?> create(@RequestBody Beer beer) {
+		Beer createdBeer = beerService.create(beer);
+		UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(createdBeer.getId());
+		return ResponseEntity.created(uriComponents.toUri()).build();
+	}
+
+	@PutMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void update(@PathVariable UUID id, @RequestBody Beer beer) {
+		beerService.update(id, beer);
+	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable UUID id) {
+		beerService.delete(id);
+	}
 }

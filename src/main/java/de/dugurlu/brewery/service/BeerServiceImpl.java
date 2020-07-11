@@ -1,6 +1,7 @@
 package de.dugurlu.brewery.service;
 
 import de.dugurlu.brewery.model.Beer;
+import de.dugurlu.brewery.model.BeerStyle;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -12,7 +13,24 @@ public class BeerServiceImpl implements BeerService {
 		return Beer.builder()
 				.id(UUID.randomUUID())
 				.name("Augustiner Hell")
-				.style("Lager Hell")
+				.style(BeerStyle.LAGER)
 				.build();
+	}
+
+
+	@Override public Beer create(Beer beer) {
+		return Beer.builder()
+				.id(UUID.randomUUID())
+				.build();
+	}
+
+
+	@Override public void update(UUID id, Beer beer) {
+
+	}
+
+
+	@Override public void delete(UUID id) {
+
 	}
 }
