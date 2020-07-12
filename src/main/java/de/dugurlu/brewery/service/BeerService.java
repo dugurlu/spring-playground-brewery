@@ -1,16 +1,16 @@
 package de.dugurlu.brewery.service;
 
 import de.dugurlu.brewery.model.Beer;
-
 import java.util.UUID;
 
 
 public interface BeerService {
-	Beer getById(UUID id);
 
-	Beer create(Beer beer);
+  Beer getById(UUID id);
 
-	void update(UUID id, Beer beer);
+  Beer create(Beer beer);
 
-	void delete(UUID id);
+  void update(UUID id, Beer beer);
+
+  void delete(UUID id);
 }
