@@ -1,8 +1,8 @@
 package de.dugurlu.brewery.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.dugurlu.brewery.model.Beer;
-import de.dugurlu.brewery.service.BeerService;
+import de.dugurlu.brewery.model.Customer;
+import de.dugurlu.brewery.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,48 +19,47 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 
-@WebMvcTest(BeerController.class)
-class BeerControllerTest {
+@WebMvcTest(CustomerController.class)
+class CustomerControllerTest {
 
-	@MockBean
-	BeerService beerService;
-
-	@Autowired
-	MockMvc mockMvc;
+	@Autowired MockMvc mockMvc;
 
 	@Autowired ObjectMapper mapper;
 
+	@MockBean CustomerService customerService;
+
 	@Test
 	void get() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/customer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 
 
 	@Test
 	void create() throws Exception {
-		when(beerService.create(isA(Beer.class))).thenReturn(Beer.builder().id(UUID.randomUUID()).build());
-		Beer beer = Beer.builder().id(UUID.randomUUID()).build();
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer/")
+		when(customerService.create(isA(Customer.class))).thenReturn(Customer.builder().id(UUID.randomUUID()).build());
+		Customer customer = Customer.builder().id(UUID.randomUUID()).build();
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/customer/")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(beer)))
+				.content(mapper.writeValueAsString(customer)))
 				.andExpect(status().isCreated());
 	}
 
 
 	@Test
 	void update() throws Exception {
-		Beer beer = Beer.builder().id(UUID.randomUUID()).build();
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/" + beer.getId().toString())
+		Customer customer = Customer.builder().id(UUID.randomUUID()).build();
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/customer/" + customer.getId().toString())
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(beer)))
+				.content(mapper.writeValueAsString(customer)))
 				.andExpect(status().isNoContent());
 	}
 
 
 	@Test
 	void delete() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/beer/" + UUID.randomUUID().toString()))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/customer/" + UUID.randomUUID().toString()))
 				.andExpect(status().isNoContent());
 	}
+
 }
