@@ -2,11 +2,17 @@ package de.dugurlu.brewery.controller;
 
 import de.dugurlu.brewery.model.BeerDto;
 import de.dugurlu.brewery.service.BeerService;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,5 +62,15 @@ public class BeerController {
   @ResponseStatus(code = HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
     beerService.delete(id);
+  }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<List>  handleValidationError(MethodArgumentNotValidException e) {
+    List<ObjectError> bindingErrors = e.getBindingResult().getAllErrors();
+    var errors = new ArrayList<String>(bindingErrors.size());
+    bindingErrors.forEach(error -> {
+      errors.add(error.toString());
+    });
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
 }
