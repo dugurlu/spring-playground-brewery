@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.dugurlu.brewery.model.Beer;
+import de.dugurlu.brewery.model.BeerDto;
 import de.dugurlu.brewery.service.BeerService;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -39,9 +39,9 @@ class BeerControllerTest {
 
   @Test
   void create() throws Exception {
-    when(beerService.create(isA(Beer.class)))
-        .thenReturn(Beer.builder().id(UUID.randomUUID()).build());
-    Beer beer = Beer.builder().id(UUID.randomUUID()).build();
+    when(beerService.create(isA(BeerDto.class)))
+        .thenReturn(BeerDto.builder().id(UUID.randomUUID()).build());
+    BeerDto beer = BeerDto.builder().id(UUID.randomUUID()).build();
     mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer/")
         .contentType(MediaType.APPLICATION_JSON)
         .content(mapper.writeValueAsString(beer)))
@@ -51,7 +51,7 @@ class BeerControllerTest {
 
   @Test
   void update() throws Exception {
-    Beer beer = Beer.builder().id(UUID.randomUUID()).build();
+    BeerDto beer = BeerDto.builder().id(UUID.randomUUID()).build();
     mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/" + beer.getId().toString())
         .contentType(MediaType.APPLICATION_JSON)
         .content(mapper.writeValueAsString(beer)))

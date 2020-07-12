@@ -1,27 +1,42 @@
 package de.dugurlu.brewery.model;
 
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import lombok.*;
+import org.hibernate.annotations.*;
 
-
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Beer {
 
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @Column(updatable = false, nullable = false)
   private UUID id;
-  private OffsetDateTime created;
-  private OffsetDateTime modified;
 
+  @Version
+  private Long version;
+
+  @CreationTimestamp
+  @Column(updatable = false)
+  private Timestamp created;
+  @UpdateTimestamp
+  private Timestamp modified;
   private String name;
-  private BeerStyle style;
+  private String style;
+
+  @Column(unique = true)
   private Long upc;
   private Long price;
-  private Integer quantity;
+
+  private Integer available;
+  private Integer toBrew;
 
 }

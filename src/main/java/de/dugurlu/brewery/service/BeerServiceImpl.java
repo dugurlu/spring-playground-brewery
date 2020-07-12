@@ -1,6 +1,6 @@
 package de.dugurlu.brewery.service;
 
-import de.dugurlu.brewery.model.Beer;
+import de.dugurlu.brewery.model.BeerDto;
 import de.dugurlu.brewery.model.BeerStyle;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 public class BeerServiceImpl implements BeerService {
 
   @Override
-  public Beer getById(UUID id) {
-    return Beer.builder()
+  public BeerDto getById(UUID id) {
+    return BeerDto.builder()
         .id(UUID.randomUUID())
         .name("Augustiner Hell")
         .style(BeerStyle.LAGER)
@@ -20,15 +20,15 @@ public class BeerServiceImpl implements BeerService {
 
 
   @Override
-  public Beer create(Beer beer) {
-    return Beer.builder()
+  public BeerDto create(BeerDto beer) {
+    return BeerDto.builder()
         .id(UUID.randomUUID())
         .build();
   }
 
 
   @Override
-  public void update(UUID id, Beer beer) {
+  public void update(UUID id, BeerDto beer) {
 
   }
 

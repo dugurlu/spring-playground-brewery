@@ -1,6 +1,6 @@
 package de.dugurlu.brewery.controller;
 
-import de.dugurlu.brewery.model.Beer;
+import de.dugurlu.brewery.model.BeerDto;
 import de.dugurlu.brewery.service.BeerService;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
@@ -31,14 +31,14 @@ public class BeerController {
 
 
   @GetMapping("/{id}")
-  public ResponseEntity<Beer> get(@PathVariable UUID id) {
+  public ResponseEntity<BeerDto> get(@PathVariable UUID id) {
     return new ResponseEntity<>(beerService.getById(id), HttpStatus.OK);
   }
 
 
   @PostMapping
-  public ResponseEntity<?> create(@RequestBody Beer beer) {
-    Beer createdBeer = beerService.create(beer);
+  public ResponseEntity<?> create(@RequestBody BeerDto beer) {
+    BeerDto createdBeer = beerService.create(beer);
     UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest()
         .path("/{id}")
         .buildAndExpand(createdBeer.getId());
@@ -47,7 +47,7 @@ public class BeerController {
 
   @PutMapping("/{id}")
   @ResponseStatus(code = HttpStatus.NO_CONTENT)
-  public void update(@PathVariable UUID id, @RequestBody Beer beer) {
+  public void update(@PathVariable UUID id, @RequestBody BeerDto beer) {
     beerService.update(id, beer);
   }
 
