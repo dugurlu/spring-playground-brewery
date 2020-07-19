@@ -1,0 +1,44 @@
+= Brewery Order Service Documentation
+Deniz Ugurlu;
+:doctype: book
+:icons: font
+:source-highlighter: hightlightjs
+
+Sample application with JUnit5 Spring REST Docs
+
+`BeerControllerTest` makes a call to a very simple service and produces three documentation snippets
+
+GET Beer:
+
+cURL Example:
+include::{snippets}/v1/beer.get/curl-request.adoc[]
+
+HTTP request example:
+include::{snippets}/v1/beer.get/http-request.adoc[]
+
+HTTP response example:
+include::{snippets}/v1/beer.get/http-response.adoc[]
+
+HTTP response body example:
+include::{snippets}/v1/beer.get/response-body.adoc[]
+
+Response fields:
+include::{snippets}/v1/beer.get/response-fields.adoc[]
+
+
+POST Beer:
+
+cURL Example:
+include::{snippets}/v1/beer.post/curl-request.adoc[]
+
+HTTP request example:
+include::{snippets}/v1/beer.post/http-request.adoc[]
+
+HTTP response example:
+include::{snippets}/v1/beer.post/http-response.adoc[]
+
+HTTP response body example:
+include::{snippets}/v1/beer.post/response-body.adoc[]
+
+Request fields:
+include::{snippets}/v1/beer.post/request-fields.adoc[]
