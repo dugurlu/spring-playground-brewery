@@ -1,5 +1,7 @@
 package de.dugurlu.brewery.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import javax.validation.constraints.NotBlank;
@@ -34,6 +36,7 @@ public class BeerDto {
   private Long upc;
   @NotNull
   @Positive
+  @JsonFormat(shape = Shape.STRING)
   private Long price;
   private Integer quantity;
 
