@@ -30,10 +30,10 @@ public class Beer {
   @UpdateTimestamp
   private Timestamp modified;
   private String name;
-  private String style;
+  private BeerStyle style;
 
   @Column(unique = true)
-  private Long upc;
+  private String upc;
   private Long price;
 
   private Integer available;

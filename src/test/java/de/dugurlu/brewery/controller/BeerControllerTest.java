@@ -82,11 +82,11 @@ class BeerControllerTest {
   @Test
   void create() throws Exception {
     when(beerService.create(isA(BeerDto.class)))
-        .thenReturn(BeerDto.builder().name("Foo").style(BeerStyle.LAGER).upc(1L).build());
+        .thenReturn(BeerDto.builder().name("Foo").style(BeerStyle.LAGER).upc("12123123").build());
     BeerDto beer = BeerDto.builder()
         .name("BeerName")
         .style(BeerStyle.LAGER)
-        .upc(1L)
+        .upc("123123123")
         .price(123L)
         .build();
 

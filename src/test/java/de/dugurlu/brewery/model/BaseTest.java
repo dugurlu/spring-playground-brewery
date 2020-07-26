@@ -20,7 +20,7 @@ public class BaseTest {
         .created(dateTime)
         .modified(dateTime)
         .price(1299L)
-        .upc(123123123123L)
+        .upc("123123123123")
         .build();
   }
 

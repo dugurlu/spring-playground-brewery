@@ -25,17 +25,14 @@ public class BeerController {
 
   private final BeerService beerService;
 
-
   public BeerController(BeerService beerService) {
     this.beerService = beerService;
   }
-
 
   @GetMapping("/{id}")
   public ResponseEntity<BeerDto> get(@PathVariable UUID id) {
     return new ResponseEntity<>(beerService.getById(id), HttpStatus.OK);
   }
-
 
   @PostMapping
   public ResponseEntity<?> create(@RequestBody @Valid BeerDto beer) {
